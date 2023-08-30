@@ -1,8 +1,8 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
   Navigate,
   Route,
+  BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
 import { AllRoutes } from "src/enums/AllRoutes";
@@ -11,13 +11,15 @@ import Login from "src/pages/Login";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path={AllRoutes.LOGIN} element={<Login />} />
-        <Route path={AllRoutes.REGISTRATION} element={<>REGISTRATION</>} />
-        <Route path="*" element={<Navigate to={AllRoutes.LOGIN} replace />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path={AllRoutes.LOGIN} element={<Login />} />
+          <Route path={AllRoutes.REGISTRATION} element={<>REGISTRATION</>} />
+          <Route path="*" element={<Navigate to={AllRoutes.LOGIN} replace />} />
+        </Routes>
+      </Router>
+    </>
   );
 };
 

@@ -1,9 +1,62 @@
-import React from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import React, { useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import Button from "src/components/Button";
+import ControlledInput from "src/components/ControlledInput";
 import { AllRoutes } from "src/enums/AllRoutes";
+import { TLoginResponse } from "src/types/TLoginResponse";
+import { TOKEN, USER_ID } from "src/utils/Constants";
+import * as Yup from "yup";
+
+const loginSchema = Yup.object().shape({
+  username: Yup.string().required("Username is required"),
+  password: Yup.string().required("Password is required"),
+});
+
+type TLoginData = Yup.InferType<typeof loginSchema>;
 
 const Login: React.FC = () => {
+  const abortController = useRef<AbortController>();
+
+  const { control, handleSubmit } = useForm({
+    mode: "all",
+    resolver: yupResolver(loginSchema),
+  });
+
+  useEffect(() => {
+    abortController.current = new AbortController();
+
+    return () => {
+      abortController.current?.abort();
+    };
+  }, []);
+
+  const login = ({ id, token }: Pick<TLoginResponse, "id" | "token">) => {
+    localStorage.setItem(TOKEN, token);
+    localStorage.setItem(USER_ID, id.toString());
+  };
+
+  const handleSave = () =>
+    handleSubmit(async ({ username, password }: TLoginData) => {
+      try {
+        const {
+          data: { token, id },
+        } = await axios.post<TLoginResponse>(
+          "https://tictactoe.aboutdream.io/login/",
+          {
+            username,
+            password,
+          },
+          { signal: abortController.current?.signal },
+        );
+
+        login({ token, id });
+      } catch (e) {
+        console.log(e);
+      }
+    })();
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -12,43 +65,19 @@ const Login: React.FC = () => {
             Login
           </h2>
 
-          <label
-            htmlFor="username"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Username
-          </label>
-          <div className="mb-4">
-            <input
-              id="username"
-              name="username"
-              type="text"
-              required
-              className="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Password
-            </label>
-          </div>
-          <div className="mb-4">
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              required
-              className="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </div>
+          <ControlledInput
+            control={control}
+            fieldName="username"
+            label="Username"
+          />
 
-          <div className="mb-4">
-            <Button label="Log in" onClick={() => ""} />
-          </div>
+          <ControlledInput
+            control={control}
+            fieldName="password"
+            label="Password"
+            type="password"
+          />
+          <Button label="Log in" onClick={handleSave} />
 
           <p className="text-center text-sm text-gray-500">
             Not a member?{" "}
