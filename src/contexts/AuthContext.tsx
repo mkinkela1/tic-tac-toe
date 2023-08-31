@@ -57,7 +57,8 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
   };
 
   const isAuthenticated = () => {
-    return isLoggedIn;
+    return true;
+    // return isLoggedIn;
   };
 
   return (

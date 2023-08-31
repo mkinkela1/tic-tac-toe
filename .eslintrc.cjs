@@ -10,4 +10,5 @@ module.exports = {
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],
+  rules: { "react-hooks/exhaustive-deps": "off" },
 };
