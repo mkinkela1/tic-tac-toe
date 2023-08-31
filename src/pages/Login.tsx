@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import Button from "src/components/Button";
 import ControlledInput from "src/components/ControlledInput";
+import { useAuth } from "src/contexts/AuthContext";
 import { AllRoutes } from "src/enums/AllRoutes";
 import { TLoginResponse } from "src/types/TLoginResponse";
-import { TOKEN, USER_ID } from "src/utils/Constants";
 import * as Yup from "yup";
 
 const loginSchema = Yup.object().shape({
@@ -18,11 +18,13 @@ const loginSchema = Yup.object().shape({
 type TLoginData = Yup.InferType<typeof loginSchema>;
 
 const Login: React.FC = () => {
+  const { login } = useAuth();
   const abortController = useRef<AbortController>();
 
   const { control, handleSubmit } = useForm({
     mode: "all",
     resolver: yupResolver(loginSchema),
+    defaultValues: { username: "", password: "" },
   });
 
   useEffect(() => {
@@ -32,11 +34,6 @@ const Login: React.FC = () => {
       abortController.current?.abort();
     };
   }, []);
-
-  const login = ({ id, token }: Pick<TLoginResponse, "id" | "token">) => {
-    localStorage.setItem(TOKEN, token);
-    localStorage.setItem(USER_ID, id.toString());
-  };
 
   const handleSave = () =>
     handleSubmit(async ({ username, password }: TLoginData) => {
