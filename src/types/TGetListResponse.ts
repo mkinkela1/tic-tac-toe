@@ -1,5 +1,5 @@
 export type TGetListResponse<T> = {
-  count: number;
+  count?: number;
   next?: string;
   previous?: string;
   results: T[];

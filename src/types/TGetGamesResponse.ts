@@ -1,20 +1,20 @@
 import { TGetListResponse } from "src/types/TGetListResponse";
 
-export type TGetGamesResponse = TGetListResponse<TResult>;
+export type TGetGamesResponse = TGetListResponse<TBoardResult>;
 
-type TResult = {
+export type TBoardResult = {
   id: number;
   board: number[][];
   winner?: TPlayer;
   first_player: TPlayer;
   second_player: TPlayer;
-  created: Date;
+  created: string;
   status: TStatus;
 };
 
-type TPlayer = {
+export type TPlayer = {
   id: number;
   username: string;
 };
 
-type TStatus = "open" | "progress" | "finished";
+export type TStatus = "open" | "progress" | "finished";

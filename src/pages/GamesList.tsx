@@ -1,51 +1,67 @@
+import Table from "src/components/table/Table";
+import DateTimeCell from "src/components/table/cells/DateTimeCell";
+import PlayerCell from "src/components/table/cells/PlayerCell";
+import WinnerCell from "src/components/table/cells/WinnerCell";
+import useColumns from "src/hooks/useColumns";
 import useFetch from "src/hooks/useFetch";
-import { TGetGamesResponse } from "src/types/TGetGamesResponse";
+import { TCell } from "src/types/TCell";
+import { TBoardResult, TGetGamesResponse } from "src/types/TGetGamesResponse";
 
 const GamesList: React.FC = () => {
   const data = useFetch<TGetGamesResponse>(
     "https://tictactoe.aboutdream.io/games/",
   );
 
-  return (
-    <table className="w-full table-auto border-collapse  text-left">
-      <thead>
-        <tr className="border-b">
-          <th className="border-b py-3 pl-3 font-bold text-gray-700">
-            First player
-          </th>
-          <th className="border-b py-3 pl-3 font-bold text-gray-700">
-            Second player
-          </th>
-          <th className="border-b py-3 pl-3 font-bold text-gray-700">Winner</th>
-          <th className="border-b py-3 pl-3 font-bold text-gray-700">
-            Created at
-          </th>
-          <th className="border-b py-3 pl-3 font-bold text-gray-700">Status</th>
-        </tr>
-      </thead>
-      <tbody className="">
-        {data?.results.map(
-          ({ first_player, second_player, winner, created, status }) => (
-            <tr className="border-b transition-all duration-300 ease-in-out odd:bg-white even:bg-gray-100 hover:bg-gray-200">
-              <td className="py-3 pl-3 font-normal text-gray-500">
-                {first_player.username}
-              </td>
-              <td className="py-3 pl-3 font-normal text-gray-500">
-                {second_player.username}
-              </td>
-              <td className="py-3 pl-3 font-normal text-gray-500">
-                {winner?.username}
-              </td>
-              <td className="py-3 pl-3 font-normal text-gray-500">
-                {new Date(created).toLocaleString()}
-              </td>
-              <td className="py-3 pl-3 font-normal text-gray-500">{status}</td>
-            </tr>
-          ),
-        )}
-      </tbody>
-    </table>
-  );
+  const columns = useColumns<TBoardResult>([
+    {
+      Header: "First player",
+      accessor: "first_player",
+      Cell: ({
+        row: {
+          original: {
+            first_player: { username },
+          },
+        },
+      }: TCell<TBoardResult>) => <PlayerCell name={username} />,
+    },
+    {
+      Header: "Second player",
+      accessor: "second_player",
+      Cell: ({
+        row: {
+          original: {
+            second_player: { username },
+          },
+        },
+      }: TCell<TBoardResult>) => <PlayerCell name={username} />,
+    },
+    {
+      Header: "Winner",
+      accessor: "winner",
+      Cell: ({
+        row: {
+          original: { winner, status },
+        },
+      }: TCell<TBoardResult>) => <WinnerCell winner={winner} status={status} />,
+    },
+    {
+      Header: "Created at",
+      accessor: "created",
+      Cell: ({
+        row: {
+          original: { created },
+        },
+      }: TCell<TBoardResult>) => <DateTimeCell value={created} />,
+    },
+    {
+      Header: "Status",
+      accessor: "status",
+    },
+  ]);
+
+  const { results, ...meta } = data || {};
+
+  return <Table columns={columns} data={results ?? []} meta={meta} />;
 };
 
 export default GamesList;
