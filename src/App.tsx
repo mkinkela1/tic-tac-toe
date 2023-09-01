@@ -11,6 +11,7 @@ import { AuthProvider } from "src/contexts/AuthContext";
 import { AllRoutes } from "src/enums/AllRoutes";
 import "src/index.css";
 import GamesList from "src/pages/GamesList";
+import Highscores from "src/pages/Highscores";
 import Login from "src/pages/Login";
 
 const App: React.FC = () => {
@@ -26,6 +27,16 @@ const App: React.FC = () => {
               <RequireAuth>
                 <Page>
                   <GamesList />
+                </Page>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path={AllRoutes.HIGHSCORES}
+            element={
+              <RequireAuth>
+                <Page>
+                  <Highscores />
                 </Page>
               </RequireAuth>
             }

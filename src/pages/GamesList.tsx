@@ -10,7 +10,6 @@ import { TBoardResult, TGetGamesResponse } from "src/types/TGetGamesResponse";
 
 const GamesList: React.FC = () => {
   const { filters, setFilters } = useTableQueryParams();
-  console.log(filters);
   const data = useFetch<TGetGamesResponse>(
     "https://tictactoe.aboutdream.io/games/",
     filters,

@@ -5,7 +5,5 @@ export const convertObjectToUrlSearchParams = (
   const urlObj = new URL(url);
   urlObj.search = new URLSearchParams(searchParamsObj).toString();
 
-  console.log(urlObj, searchParamsObj);
-
   return urlObj.href;
 };
