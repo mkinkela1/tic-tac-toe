@@ -1,23 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import axiosInstance from "src/utils/axiosInstance";
+import { convertObjectToUrlSearchParams } from "src/utils/convertObjectToSearchParams";
 
-const useFetch = <T>(url: string) => {
+const useFetch = <T>(url: string, searchParams: Record<string, string>) => {
   const abortController = useRef<AbortController>();
   const [data, setData] = useState<T | null>(null);
+  const urlWithSearchParams = convertObjectToUrlSearchParams(url, searchParams);
 
   useEffect(() => {
     abortController.current = new AbortController();
-
-    loadData();
 
     return () => {
       abortController.current?.abort();
     };
   }, []);
 
+  useEffect(() => {
+    loadData();
+  }, [urlWithSearchParams]);
+
   const loadData = async () => {
     try {
-      const { data } = await axiosInstance.get(url, {
+      const { data } = await axiosInstance.get(urlWithSearchParams, {
         signal: abortController.current?.signal,
       });
 

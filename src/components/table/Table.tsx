@@ -1,17 +1,33 @@
 import { useTable } from "react-table";
+import Pagination from "src/components/table/Pagination";
 import { TRow, TableProps } from "src/types/TableProps";
+import { getSearchParamsFromUrl } from "src/utils/getSearchParams";
+import { isEmpty, isNotEmpty } from "src/utils/isEmpty";
 
 const Table = <T extends TRow>({
   columns = [],
   data = [],
   meta: { count, next, previous },
+  setTableQueryParams,
 }: TableProps<T>) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
-  const goToPrev = () => {};
+  const goToPrev = () => {
+    if (isEmpty(previous)) return;
 
-  const goToNext = () => {};
+    const queryParams = getSearchParamsFromUrl(previous ?? "");
+
+    setTableQueryParams(queryParams);
+  };
+
+  const goToNext = () => {
+    if (isEmpty(next)) return;
+
+    const queryParams = getSearchParamsFromUrl(next ?? "");
+
+    setTableQueryParams(queryParams);
+  };
 
   return (
     <section className="relative w-full overflow-x-hidden">
@@ -62,26 +78,16 @@ const Table = <T extends TRow>({
               })}
             </tbody>
           </table>
-          <nav className="flex w-full items-center justify-between">
-            <p className="mt-1 text-base text-gray-600">
+          <nav className="flex w-full items-center justify-between mt-2">
+            <p className="text-base text-gray-600">
               <strong>Total: </strong> {count} results
             </p>
-            <ul className="list-style-none mt-2.5 flex">
-              {/* <li>
-                <Button
-                  onClick={goToPrev}
-                  disabled={isNullOrUndefined(beforeCursor)}
-                  label="Previous"
-                />
-              </li>
-              <li>
-                <Button
-                  onClick={goToNext}
-                  disabled={isNullOrUndefined(afterCursor)}
-                  label="Next"
-                />
-              </li> */}
-            </ul>
+            <Pagination
+              canGoToPreviousPage={isNotEmpty(previous)}
+              canGoToNextPage={isNotEmpty(next)}
+              handlePreviousClick={goToPrev}
+              handleNextClick={goToNext}
+            />
           </nav>
         </div>
       </div>

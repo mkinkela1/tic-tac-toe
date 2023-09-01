@@ -4,12 +4,16 @@ import PlayerCell from "src/components/table/cells/PlayerCell";
 import WinnerCell from "src/components/table/cells/WinnerCell";
 import useColumns from "src/hooks/useColumns";
 import useFetch from "src/hooks/useFetch";
+import useTableQueryParams from "src/hooks/useTableQueryParams";
 import { TCell } from "src/types/TCell";
 import { TBoardResult, TGetGamesResponse } from "src/types/TGetGamesResponse";
 
 const GamesList: React.FC = () => {
+  const { filters, setFilters } = useTableQueryParams();
+  console.log(filters);
   const data = useFetch<TGetGamesResponse>(
     "https://tictactoe.aboutdream.io/games/",
+    filters,
   );
 
   const columns = useColumns<TBoardResult>([
@@ -61,7 +65,14 @@ const GamesList: React.FC = () => {
 
   const { results, ...meta } = data || {};
 
-  return <Table columns={columns} data={results ?? []} meta={meta} />;
+  return (
+    <Table
+      columns={columns}
+      data={results}
+      meta={meta}
+      setTableQueryParams={setFilters}
+    />
+  );
 };
 
 export default GamesList;
