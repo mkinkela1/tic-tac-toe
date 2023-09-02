@@ -1,10 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import Button from "src/components/Button";
 import SelectableDropdown, { TOption } from "src/components/SelectableDropdown";
 import Table from "src/components/table/Table";
 import DateTimeCell from "src/components/table/cells/DateTimeCell";
 import PlayerCell from "src/components/table/cells/PlayerCell";
 import WinnerCell from "src/components/table/cells/WinnerCell";
+import { AllRoutes } from "src/enums/AllRoutes";
 import useColumns from "src/hooks/useColumns";
+import useCreateNewGame from "src/hooks/useCreateNewGame";
 import useFetch from "src/hooks/useFetch";
 import useTableQueryParams from "src/hooks/useTableQueryParams";
 import { TCell } from "src/types/TCell";
@@ -18,10 +21,12 @@ const statusOptions: TOption[] = [
 
 const GamesList: React.FC = () => {
   const { filters, setFilters } = useTableQueryParams();
-  const data = useFetch<TGetGamesResponse>(
+  const { data, refetch: refetchGamesList } = useFetch<TGetGamesResponse>(
     "https://tictactoe.aboutdream.io/games/",
     filters,
   );
+  const { createNewGame } = useCreateNewGame();
+  const navigate = useNavigate();
 
   const columns = useColumns<TBoardResult>([
     {
@@ -72,6 +77,14 @@ const GamesList: React.FC = () => {
 
   const { results, ...meta } = data || {};
 
+  const onCrateNewGame = async () => {
+    const id = await createNewGame();
+
+    await refetchGamesList();
+
+    navigate(`${AllRoutes.GAMES}/${id}`);
+  };
+
   return (
     <>
       <section className="relative w-full">
@@ -82,10 +95,7 @@ const GamesList: React.FC = () => {
             value={filters?.status}
           />
           <div className="max-w-sm">
-            <Button
-              label="Start new game"
-              onClick={() => console.log("click")}
-            />
+            <Button label="Start new game" onClick={onCrateNewGame} />
           </div>
         </div>
       </section>

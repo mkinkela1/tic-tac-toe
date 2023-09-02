@@ -33,7 +33,7 @@ const useFetch = <T>(url: string, searchParams: Record<string, string>) => {
     }
   };
 
-  return data;
+  return { data, refetch: loadData };
 };
 
 export default useFetch;
