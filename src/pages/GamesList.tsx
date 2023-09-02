@@ -40,11 +40,11 @@ const GamesList: React.FC = () => {
       accessor: "second_player",
       Cell: ({
         row: {
-          original: {
-            second_player: { username, id },
-          },
+          original: { second_player },
         },
-      }: TCell<TBoardResult>) => <PlayerCell name={username} userId={id} />,
+      }: TCell<TBoardResult>) => (
+        <PlayerCell name={second_player?.username} userId={second_player?.id} />
+      ),
     },
     {
       Header: "Winner",

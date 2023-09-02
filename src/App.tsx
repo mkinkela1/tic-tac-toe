@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Navigate,
+  Outlet,
   Route,
   BrowserRouter as Router,
   Routes,
@@ -12,6 +13,7 @@ import RequireAuth from "src/components/RequireAuth";
 import { AuthProvider } from "src/contexts/AuthContext";
 import { AllRoutes } from "src/enums/AllRoutes";
 import "src/index.css";
+import Game from "src/pages/Game";
 import GamesList from "src/pages/GamesList";
 import Highscores from "src/pages/Highscores";
 import Login from "src/pages/Login";
@@ -30,10 +32,20 @@ const App: React.FC = () => {
               <RequireAuth>
                 <Page>
                   <GamesList />
+                  <Outlet />
                 </Page>
               </RequireAuth>
             }
-          />
+          >
+            <Route
+              path=":id"
+              element={
+                <RequireAuth>
+                  <Game />
+                </RequireAuth>
+              }
+            />
+          </Route>
           <Route
             path={AllRoutes.HIGHSCORES}
             element={

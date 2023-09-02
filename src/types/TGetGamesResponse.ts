@@ -7,7 +7,7 @@ export type TBoardResult = {
   board: number[][];
   winner?: TPlayer;
   first_player: TPlayer;
-  second_player: TPlayer;
+  second_player?: TPlayer;
   created: string;
   status: TStatus;
 };
