@@ -1,4 +1,6 @@
+import { CanceledError } from "axios";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import axiosInstance from "src/utils/axiosInstance";
 import { convertObjectToUrlSearchParams } from "src/utils/convertObjectToSearchParams";
 
@@ -26,8 +28,8 @@ const useFetch = <T>(url: string, searchParams: Record<string, string>) => {
       });
 
       setData(data);
-    } catch {
-      console.log("Unable to fetch data");
+    } catch (e) {
+      if (!(e instanceof CanceledError)) toast.error("Unable to fetch data.");
     }
   };
 

@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Button from "src/components/Button";
 import ControlledInput from "src/components/ControlledInput";
 import { useAuth } from "src/contexts/AuthContext";
@@ -50,8 +51,8 @@ const Login: React.FC = () => {
         );
 
         login({ token, id });
-      } catch (e) {
-        console.log(e);
+      } catch {
+        toast.error("Unable to login.");
       }
     })();
   return (

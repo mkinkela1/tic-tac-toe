@@ -8,11 +8,8 @@ type Props = {
 };
 
 const WinnerCell: React.FC<Props> = ({ winner, status }) => {
-  if (status === "finished") {
-    if (isNotEmpty(winner?.username))
-      return <div className="font-bold">{winner?.username}</div>;
-    return "Draw";
-  }
+  if (status === "finished" && isNotEmpty(winner?.username))
+    return <div className="font-bold">{winner?.username}</div>;
 
   return "";
 };

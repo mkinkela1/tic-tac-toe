@@ -5,6 +5,8 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Page from "src/components/Page";
 import RequireAuth from "src/components/RequireAuth";
 import { AuthProvider } from "src/contexts/AuthContext";
@@ -17,6 +19,7 @@ import Login from "src/pages/Login";
 const App: React.FC = () => {
   return (
     <Router>
+      <ToastContainer />
       <AuthProvider>
         <Routes>
           <Route path={AllRoutes.LOGIN} element={<Login />} />

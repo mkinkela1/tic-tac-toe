@@ -1,3 +1,5 @@
+import Button from "src/components/Button";
+import SelectableDropdown, { TOption } from "src/components/SelectableDropdown";
 import Table from "src/components/table/Table";
 import DateTimeCell from "src/components/table/cells/DateTimeCell";
 import PlayerCell from "src/components/table/cells/PlayerCell";
@@ -7,6 +9,12 @@ import useFetch from "src/hooks/useFetch";
 import useTableQueryParams from "src/hooks/useTableQueryParams";
 import { TCell } from "src/types/TCell";
 import { TBoardResult, TGetGamesResponse } from "src/types/TGetGamesResponse";
+
+const statusOptions: TOption[] = [
+  { id: "open", value: "open", label: "Open" },
+  { id: "progress", value: "progress", label: "In progress" },
+  { id: "finished", value: "finished", label: "Finished" },
+];
 
 const GamesList: React.FC = () => {
   const { filters, setFilters } = useTableQueryParams();
@@ -22,10 +30,10 @@ const GamesList: React.FC = () => {
       Cell: ({
         row: {
           original: {
-            first_player: { username },
+            first_player: { username, id },
           },
         },
-      }: TCell<TBoardResult>) => <PlayerCell name={username} />,
+      }: TCell<TBoardResult>) => <PlayerCell name={username} userId={id} />,
     },
     {
       Header: "Second player",
@@ -33,10 +41,10 @@ const GamesList: React.FC = () => {
       Cell: ({
         row: {
           original: {
-            second_player: { username },
+            second_player: { username, id },
           },
         },
-      }: TCell<TBoardResult>) => <PlayerCell name={username} />,
+      }: TCell<TBoardResult>) => <PlayerCell name={username} userId={id} />,
     },
     {
       Header: "Winner",
@@ -65,12 +73,29 @@ const GamesList: React.FC = () => {
   const { results, ...meta } = data || {};
 
   return (
-    <Table
-      columns={columns}
-      data={results}
-      meta={meta}
-      setTableQueryParams={setFilters}
-    />
+    <>
+      <section className="relative w-full">
+        <div className="mx-auto px-4 w-full flex items-end mb-4 justify-between">
+          <SelectableDropdown
+            options={statusOptions}
+            onSelect={(status: TOption) => setFilters({ status: status.value })}
+            value={filters?.status}
+          />
+          <div className="max-w-sm">
+            <Button
+              label="Start new game"
+              onClick={() => console.log("click")}
+            />
+          </div>
+        </div>
+      </section>
+      <Table
+        columns={columns}
+        data={results}
+        meta={meta}
+        setTableQueryParams={setFilters}
+      />
+    </>
   );
 };
 

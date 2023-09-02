@@ -78,7 +78,7 @@ const Table = <T extends TRow>({
               })}
             </tbody>
           </table>
-          <nav className="flex w-full items-center justify-between mt-2">
+          <nav className="flex w-full items-center justify-between mt-4">
             <p className="text-base text-gray-600">
               <strong>Total: </strong> {count} results
             </p>

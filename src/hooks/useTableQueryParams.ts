@@ -8,14 +8,17 @@ const useTableQueryParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    setSearchParams({ limit: "10" });
+    setSearchParams({ ...Object.fromEntries(searchParams), limit: "10" });
   }, []);
 
   const setFilters = (newFilters: Record<string, unknown>) => {
-    setSearchParams((prevSearchParams) => ({
-      ...prevSearchParams,
-      ...newFilters,
-    }));
+    setSearchParams(() => {
+      const searchParams = new URLSearchParams({ limit: "10" });
+      for (const [key, value] of Object.entries(newFilters))
+        searchParams.set(key, value as string);
+
+      return searchParams;
+    });
   };
 
   return { filters: Object.fromEntries(searchParams), setFilters };
