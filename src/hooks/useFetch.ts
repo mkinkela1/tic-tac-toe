@@ -4,7 +4,11 @@ import { toast } from "react-toastify";
 import axiosInstance from "src/utils/axiosInstance";
 import { convertObjectToUrlSearchParams } from "src/utils/convertObjectToSearchParams";
 
-const useFetch = <T>(url: string, searchParams: Record<string, string>) => {
+const useFetch = <T>(
+  url: string,
+  searchParams: Record<string, string> = {},
+  loadDataOnInit = true,
+) => {
   const abortController = useRef<AbortController>();
   const [data, setData] = useState<T | null>(null);
   const urlWithSearchParams = convertObjectToUrlSearchParams(url, searchParams);
@@ -18,7 +22,7 @@ const useFetch = <T>(url: string, searchParams: Record<string, string>) => {
   }, []);
 
   useEffect(() => {
-    loadData();
+    if (loadDataOnInit) loadData();
   }, [urlWithSearchParams]);
 
   const loadData = async () => {

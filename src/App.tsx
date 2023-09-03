@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Page from "src/components/Page";
 import RequireAuth from "src/components/RequireAuth";
 import { AuthProvider } from "src/contexts/AuthContext";
+import { GameProvider } from "src/contexts/GameContext";
 import { AllRoutes } from "src/enums/AllRoutes";
 import "src/index.css";
 import Game from "src/pages/Game";
@@ -42,7 +43,9 @@ const App: React.FC = () => {
               path=":id"
               element={
                 <RequireAuth>
-                  <Game />
+                  <GameProvider>
+                    <Game />
+                  </GameProvider>
                 </RequireAuth>
               }
             />

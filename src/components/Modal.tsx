@@ -4,7 +4,7 @@ import Button from "src/components/Button";
 
 type Props = {
   onClose: () => void;
-  title: string;
+  title: string | React.ReactNode;
   children: React.ReactNode;
 };
 
@@ -35,7 +35,9 @@ const Modal: React.FC<Props> = ({ onClose, title, children }) => {
   return createPortal(
     <div className="fixed w-screen h-screen bg-slate-950/50 top-0 left-0 right-0 bottom-0 flex flex-col items-center box-border">
       <div className="max-w-4xl w-full bg-white p-2 m-4 rounded">
-        <h1 className="text-center text-xl font-bold">{title}</h1>
+        <h1 className="text-center text-2xl font-bold my-5 max-w-md mx-auto">
+          {title}
+        </h1>
         <div className="mx-auto p-4 flex justify-center">{children}</div>
         <div className="w-52 mx-auto">
           <Button label="Close" onClick={onClose} />

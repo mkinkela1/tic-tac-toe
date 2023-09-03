@@ -5,6 +5,7 @@ import { AllRoutes } from "src/enums/AllRoutes";
 import { TLoginResponse } from "src/types/TLoginResponse";
 import { TOKEN, USER_ID } from "src/utils/Constants";
 import { isNotEmpty } from "src/utils/isEmpty";
+import { isNullOrUndefined } from "src/utils/isNotNullOrUndefined";
 
 type TLoginData = Pick<TLoginResponse, "id" | "token">;
 
@@ -69,8 +70,10 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
 
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+
+  if (isNullOrUndefined(context)) {
+    throw new Error("useAuth must be used within an AuthProvider.");
   }
+
   return context;
 };
