@@ -8,7 +8,7 @@ import { TGetUsersResponse, TUser } from "src/types/TGetUsersResponse";
 
 const Highscores: React.FC = () => {
   const { filters, setFilters } = useTableQueryParams();
-  const data = useFetch<TGetUsersResponse>(
+  const { data } = useFetch<TGetUsersResponse>(
     "https://tictactoe.aboutdream.io/users/",
     filters,
   );

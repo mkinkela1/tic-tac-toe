@@ -17,6 +17,7 @@ import Game from "src/pages/Game";
 import GamesList from "src/pages/GamesList";
 import Highscores from "src/pages/Highscores";
 import Login from "src/pages/Login";
+import Registration from "src/pages/Registration";
 
 const App: React.FC = () => {
   return (
@@ -25,7 +26,7 @@ const App: React.FC = () => {
       <AuthProvider>
         <Routes>
           <Route path={AllRoutes.LOGIN} element={<Login />} />
-          <Route path={AllRoutes.REGISTRATION} element={<>REGISTRATION</>} />
+          <Route path={AllRoutes.REGISTRATION} element={<Registration />} />
           <Route
             path={AllRoutes.GAMES}
             element={

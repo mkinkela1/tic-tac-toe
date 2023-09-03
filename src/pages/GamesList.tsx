@@ -3,6 +3,7 @@ import Button from "src/components/Button";
 import SelectableDropdown, { TOption } from "src/components/SelectableDropdown";
 import Table from "src/components/table/Table";
 import DateTimeCell from "src/components/table/cells/DateTimeCell";
+import GameActionsCell from "src/components/table/cells/GameActionsCell";
 import PlayerCell from "src/components/table/cells/PlayerCell";
 import WinnerCell from "src/components/table/cells/WinnerCell";
 import { AllRoutes } from "src/enums/AllRoutes";
@@ -72,6 +73,12 @@ const GamesList: React.FC = () => {
     {
       Header: "Status",
       accessor: "status",
+    },
+    {
+      Header: "Actions",
+      Cell: ({ row: { original } }: TCell<TBoardResult>) => (
+        <GameActionsCell value={original} />
+      ),
     },
   ]);
 
