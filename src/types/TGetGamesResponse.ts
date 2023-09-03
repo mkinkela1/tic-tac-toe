@@ -4,7 +4,7 @@ export type TGetGamesResponse = TGetListResponse<TBoardResult>;
 
 export type TBoardResult = {
   id: number;
-  board: number[][];
+  board: (number | null)[][];
   winner?: TPlayer;
   first_player: TPlayer;
   second_player?: TPlayer;

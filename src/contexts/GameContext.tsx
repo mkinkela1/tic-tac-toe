@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useAuth } from "src/contexts/AuthContext";
 import useFetch from "src/hooks/useFetch";
 import { TBoardResult } from "src/types/TGetGamesResponse";
 import { GAME_REFETCH_INTERVAL_IN_MS } from "src/utils/Constants";
@@ -18,6 +19,7 @@ type GameContextProviderProps = {
 };
 
 export type TTurn = "player1" | "player2" | null;
+type TBoard = TBoardResult["board"];
 
 type TGameContext = {
   setGameId: React.Dispatch<React.SetStateAction<number | null>>;
@@ -25,6 +27,8 @@ type TGameContext = {
   data: TBoardResult | null;
   isGameLoaded: boolean;
   calculateTurn: () => TTurn;
+  board: TBoard;
+  setBoard: (rowId: number, columnId: number) => void;
 };
 
 const GameContext = createContext<TGameContext | null>(null);
@@ -33,17 +37,27 @@ export const GameProvider: React.FC<GameContextProviderProps> = ({
   children,
 }) => {
   const [gameId, setGameId] = useState<number | null>(null);
+  const { userId } = useAuth();
   const [isGameLoaded, setIsGameLoaded] = useState(false);
   const { data, refetch } = useFetch<TBoardResult>(
     `https://tictactoe.aboutdream.io/games/${gameId}/`,
     {},
     false,
   );
+  const [board, _setBoard] = useState<TBoard>([
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+  ]);
   const intervalRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     if (isNotNullOrUndefined(data?.id)) setIsGameLoaded(true);
   }, [data?.id]);
+
+  useEffect(() => {
+    if (isNotNullOrUndefined(data?.board)) _setBoard(data!.board);
+  }, [data?.board]);
 
   useEffect(() => {
     if (isNotNullOrUndefined(gameId))
@@ -55,8 +69,15 @@ export const GameProvider: React.FC<GameContextProviderProps> = ({
     };
   }, [gameId]);
 
-  const getCell = (rowId: number, columnId: number) =>
-    data?.board.at(rowId)?.at(columnId) ?? null;
+  const getCell = (rowId: number, columnId: number) => board[rowId][columnId];
+
+  const setBoard = (rowId: number, columnId: number) =>
+    _setBoard((prevBoard) => {
+      const board = [...prevBoard];
+      board[rowId][columnId] = userId;
+
+      return board;
+    });
 
   const calculateTurn = (): TTurn => {
     if (data?.status !== "progress") return null;
@@ -84,7 +105,15 @@ export const GameProvider: React.FC<GameContextProviderProps> = ({
 
   return (
     <GameContext.Provider
-      value={{ setGameId, getCell, data, isGameLoaded, calculateTurn }}
+      value={{
+        setGameId,
+        getCell,
+        data,
+        isGameLoaded,
+        calculateTurn,
+        board,
+        setBoard,
+      }}
     >
       {children}
     </GameContext.Provider>
