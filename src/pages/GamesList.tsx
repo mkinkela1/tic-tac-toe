@@ -77,7 +77,7 @@ const GamesList: React.FC = () => {
     {
       Header: "Actions",
       Cell: ({ row: { original } }: TCell<TBoardResult>) => (
-        <GameActionsCell value={original} />
+        <GameActionsCell value={original} dependencyUpdate={refetchGamesList} />
       ),
     },
   ]);
