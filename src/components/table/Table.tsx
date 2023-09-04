@@ -33,7 +33,7 @@ const Table = <T extends TRow>({
     <section className="relative w-full overflow-x-hidden">
       <div className="mx-auto px-4">
         <div
-          className="bg-secondary overflow-x-scroll rounded-md border border-gray-200 p-5 shadow-sm md:w-full"
+          className="bg-secondary overflow-x-auto rounded-md border border-gray-200 p-5 shadow-sm md:w-full"
           data-aos="fade-up"
         >
           <table
