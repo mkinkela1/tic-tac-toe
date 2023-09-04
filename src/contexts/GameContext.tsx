@@ -60,6 +60,10 @@ export const GameProvider: React.FC<GameContextProviderProps> = ({
   }, [data?.board]);
 
   useEffect(() => {
+    if (data?.status === "finished") clearInterval(intervalRef.current);
+  }, [data?.status]);
+
+  useEffect(() => {
     if (isNotNullOrUndefined(gameId))
       intervalRef.current = setInterval(refetch, GAME_REFETCH_INTERVAL_IN_MS);
 

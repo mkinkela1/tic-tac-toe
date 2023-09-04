@@ -33,6 +33,7 @@ const useFetch = <T>(
 
       setData(data);
     } catch (e) {
+      console.log(e);
       if (!(e instanceof CanceledError)) toast.error("Unable to fetch data.");
     }
   };
