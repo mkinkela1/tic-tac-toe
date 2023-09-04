@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NoInternetConnection from "src/components/NoInternetConnection";
 import Page from "src/components/Page";
 import RequireAuth from "src/components/RequireAuth";
 import { AuthProvider } from "src/contexts/AuthContext";
@@ -25,55 +26,60 @@ const App: React.FC = () => {
   return (
     <Router>
       <ToastContainer />
-      <AuthProvider>
-        <Routes>
-          <Route path={AllRoutes.LOGIN} element={<Login />} />
-          <Route path={AllRoutes.REGISTRATION} element={<Registration />} />
-          <Route
-            path={AllRoutes.GAMES}
-            element={
-              <RequireAuth>
-                <Page>
-                  <GamesList />
-                  <Outlet />
-                </Page>
-              </RequireAuth>
-            }
-          >
+      <NoInternetConnection>
+        <AuthProvider>
+          <Routes>
+            <Route path={AllRoutes.LOGIN} element={<Login />} />
+            <Route path={AllRoutes.REGISTRATION} element={<Registration />} />
             <Route
-              path=":id"
+              path={AllRoutes.GAMES}
               element={
                 <RequireAuth>
-                  <GameProvider>
-                    <Game />
-                  </GameProvider>
+                  <Page>
+                    <GamesList />
+                    <Outlet />
+                  </Page>
+                </RequireAuth>
+              }
+            >
+              <Route
+                path=":id"
+                element={
+                  <RequireAuth>
+                    <GameProvider>
+                      <Game />
+                    </GameProvider>
+                  </RequireAuth>
+                }
+              />
+            </Route>
+            <Route
+              path={AllRoutes.HIGHSCORES}
+              element={
+                <RequireAuth>
+                  <Page>
+                    <Highscores />
+                  </Page>
                 </RequireAuth>
               }
             />
-          </Route>
-          <Route
-            path={AllRoutes.HIGHSCORES}
-            element={
-              <RequireAuth>
-                <Page>
-                  <Highscores />
-                </Page>
-              </RequireAuth>
-            }
-          />
-          <Route
-            path={AllRoutes.LOGOUT}
-            element={
-              <RequireAuth>
-                <Page>
-                  <Logout />
-                </Page>
-              </RequireAuth>
-            }
-          />
-          <Route path="*" element={<Navigate to={AllRoutes.LOGIN} replace />} />
-        </Routes>
-      </AuthProvider>
+            <Route
+              path={AllRoutes.LOGOUT}
+              element={
+                <RequireAuth>
+                  <Page>
+                    <Logout />
+                  </Page>
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="*"
+              element={<Navigate to={AllRoutes.LOGIN} replace />}
+            />
+          </Routes>
+        </AuthProvider>
+      </NoInternetConnection>
     </Router>
   );
 };
