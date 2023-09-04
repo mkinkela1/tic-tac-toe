@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Board from "src/components/Board/Board";
+import Board from "src/components/board/Board";
 import Modal from "src/components/Modal/Modal";
 import PlayerInfo from "src/components/PlayerInfo/PlayerInfo";
 import SkeletonLoader from "src/components/SkeletonLoader/SkeletonLoader";

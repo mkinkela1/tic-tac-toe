@@ -1,5 +1,5 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import CircleIcon from "src/components/Board/CircleIcon";
+import CircleIcon from "src/components/board/CircleIcon";
 import SkeletonLoader from "src/components/SkeletonLoader/SkeletonLoader";
 import { useGame } from "src/contexts/GameContext";
 import { TPlayer } from "src/types/TGetGamesResponse";
