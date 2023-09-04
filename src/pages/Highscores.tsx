@@ -1,3 +1,4 @@
+import Button from "src/components/Button";
 import Table from "src/components/table/Table";
 import WinRateCell from "src/components/table/cells/WinRateCell";
 import useColumns from "src/hooks/useColumns";
@@ -8,7 +9,7 @@ import { TGetUsersResponse, TUser } from "src/types/TGetUsersResponse";
 
 const Highscores: React.FC = () => {
   const { filters, setFilters } = useTableQueryParams();
-  const { data } = useFetch<TGetUsersResponse>(
+  const { data, refetch: refetchUsersList } = useFetch<TGetUsersResponse>(
     "https://tictactoe.aboutdream.io/users/",
     filters,
   );
@@ -36,12 +37,21 @@ const Highscores: React.FC = () => {
   const { results, ...meta } = data || {};
 
   return (
-    <Table
-      columns={columns}
-      data={results}
-      meta={meta}
-      setTableQueryParams={setFilters}
-    />
+    <>
+      <section className="relative w-full flex flex-col">
+        <div className="mx-auto px-4 w-full flex mb-4 justify-end">
+          <div className="max-w-sm">
+            <Button label="Refresh" onClick={refetchUsersList} />
+          </div>
+        </div>
+      </section>
+      <Table
+        columns={columns}
+        data={results}
+        meta={meta}
+        setTableQueryParams={setFilters}
+      />
+    </>
   );
 };
 

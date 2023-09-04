@@ -94,15 +94,16 @@ const GamesList: React.FC = () => {
 
   return (
     <>
-      <section className="relative w-full">
-        <div className="mx-auto px-4 w-full flex items-end mb-4 justify-between">
+      <section className="relative w-full flex">
+        <div className="mx-auto px-4 w-full flex mb-4 justify-between lg:flex lg:flex-row flex-col items-center">
           <SelectableDropdown
             options={statusOptions}
             onSelect={(status: TOption) => setFilters({ status: status.value })}
             value={filters?.status}
           />
-          <div className="max-w-sm">
+          <div className="max-w-sm lg:flex lg:flex-row flex-col gap-2">
             <Button label="Start new game" onClick={onCrateNewGame} />
+            <Button label="Refresh" onClick={refetchGamesList} />
           </div>
         </div>
       </section>
