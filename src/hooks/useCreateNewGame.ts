@@ -2,6 +2,7 @@ import { CanceledError } from "axios";
 import { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { TBoardResult } from "src/types/TGetGamesResponse";
+import { BASE_API_URL } from "src/utils/Constants";
 import axiosInstance from "src/utils/axiosInstance";
 
 const useCreateNewGame = () => {
@@ -20,7 +21,7 @@ const useCreateNewGame = () => {
       const {
         data: { id },
       } = await axiosInstance.post<TBoardResult>(
-        "https://tictactoe.aboutdream.io/games/",
+        `${BASE_API_URL}/games/`,
         {},
         {
           signal: abortController.current?.signal,

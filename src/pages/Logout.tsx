@@ -2,6 +2,7 @@ import { CanceledError } from "axios";
 import { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { useAuth } from "src/contexts/AuthContext";
+import { BASE_API_URL } from "src/utils/Constants";
 import axiosInstance from "src/utils/axiosInstance";
 
 const Logout = () => {
@@ -21,7 +22,7 @@ const Logout = () => {
   const handleLogout = async () => {
     try {
       await axiosInstance.post(
-        "https://tictactoe.aboutdream.io/logout/",
+        `${BASE_API_URL}/logout/`,
         {},
         { signal: abortController.current?.signal },
       );

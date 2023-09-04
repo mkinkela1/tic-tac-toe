@@ -13,6 +13,7 @@ import useFetch from "src/hooks/useFetch";
 import useTableQueryParams from "src/hooks/useTableQueryParams";
 import { TCell } from "src/types/TCell";
 import { TBoardResult, TGetGamesResponse } from "src/types/TGetGamesResponse";
+import { BASE_API_URL } from "src/utils/Constants";
 
 const statusOptions: TOption[] = [
   { id: "open", value: "open", label: "Open" },
@@ -23,7 +24,7 @@ const statusOptions: TOption[] = [
 const GamesList: React.FC = () => {
   const { filters, setFilters } = useTableQueryParams();
   const { data, refetch: refetchGamesList } = useFetch<TGetGamesResponse>(
-    "https://tictactoe.aboutdream.io/games/",
+    `${BASE_API_URL}/games/`,
     filters,
   );
   const { createNewGame } = useCreateNewGame();

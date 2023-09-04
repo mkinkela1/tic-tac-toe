@@ -2,6 +2,7 @@ import { CanceledError } from "axios";
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { BASE_API_URL } from "src/utils/Constants";
 import axiosInstance from "src/utils/axiosInstance";
 
 const useMove = () => {
@@ -19,7 +20,7 @@ const useMove = () => {
   const addMove = async (row: number, col: number) => {
     try {
       await axiosInstance.post(
-        `https://tictactoe.aboutdream.io/games/${id}/move/`,
+        `${BASE_API_URL}/games/${id}/move/`,
         { row, col },
         {
           signal: abortController.current?.signal,

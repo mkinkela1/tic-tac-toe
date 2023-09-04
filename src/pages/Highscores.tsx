@@ -6,11 +6,12 @@ import useFetch from "src/hooks/useFetch";
 import useTableQueryParams from "src/hooks/useTableQueryParams";
 import { TCell } from "src/types/TCell";
 import { TGetUsersResponse, TUser } from "src/types/TGetUsersResponse";
+import { BASE_API_URL } from "src/utils/Constants";
 
 const Highscores: React.FC = () => {
   const { filters, setFilters } = useTableQueryParams();
   const { data, refetch: refetchUsersList } = useFetch<TGetUsersResponse>(
-    "https://tictactoe.aboutdream.io/users/",
+    `${BASE_API_URL}/users/`,
     filters,
   );
 

@@ -8,7 +8,7 @@ import React, {
 import { useAuth } from "src/contexts/AuthContext";
 import useFetch from "src/hooks/useFetch";
 import { TBoardResult } from "src/types/TGetGamesResponse";
-import { GAME_REFETCH_INTERVAL_IN_MS } from "src/utils/Constants";
+import { BASE_API_URL, GAME_REFETCH_INTERVAL_IN_MS } from "src/utils/Constants";
 import {
   isNotNullOrUndefined,
   isNullOrUndefined,
@@ -40,7 +40,7 @@ export const GameProvider: React.FC<GameContextProviderProps> = ({
   const { userId } = useAuth();
   const [isGameLoaded, setIsGameLoaded] = useState(false);
   const { data, refetch } = useFetch<TBoardResult>(
-    `https://tictactoe.aboutdream.io/games/${gameId}/`,
+    `${BASE_API_URL}/games/${gameId}/`,
     {},
     false,
   );

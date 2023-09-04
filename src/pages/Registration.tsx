@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Button from "src/components/Button";
 import ControlledInput from "src/components/ControlledInput";
 import { AllRoutes } from "src/enums/AllRoutes";
+import { BASE_API_URL } from "src/utils/Constants";
 import { isNotObjectEmpty } from "src/utils/isEmptyObject";
 import * as Yup from "yup";
 
@@ -46,7 +47,7 @@ const Registration: React.FC = () => {
     handleSubmit(async ({ username, password }: TRegistrationData) => {
       try {
         await axios.post(
-          "https://tictactoe.aboutdream.io/register/",
+          `${BASE_API_URL}/register/`,
           {
             username,
             password,

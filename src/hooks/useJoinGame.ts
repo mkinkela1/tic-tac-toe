@@ -1,6 +1,7 @@
 import { CanceledError } from "axios";
 import { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
+import { BASE_API_URL } from "src/utils/Constants";
 import axiosInstance from "src/utils/axiosInstance";
 
 const useJoinGame = (id: number) => {
@@ -17,7 +18,7 @@ const useJoinGame = (id: number) => {
   const joinGame = async () => {
     try {
       await axiosInstance.post(
-        `https://tictactoe.aboutdream.io/games/${id}/join/`,
+        `${BASE_API_URL}/games/${id}/join/`,
         {},
         {
           signal: abortController.current?.signal,

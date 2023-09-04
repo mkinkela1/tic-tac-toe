@@ -9,6 +9,7 @@ import ControlledInput from "src/components/ControlledInput";
 import { useAuth } from "src/contexts/AuthContext";
 import { AllRoutes } from "src/enums/AllRoutes";
 import { TLoginResponse } from "src/types/TLoginResponse";
+import { BASE_API_URL } from "src/utils/Constants";
 import * as Yup from "yup";
 
 const loginSchema = Yup.object().shape({
@@ -42,7 +43,7 @@ const Login: React.FC = () => {
         const {
           data: { token, id },
         } = await axios.post<TLoginResponse>(
-          "https://tictactoe.aboutdream.io/login/",
+          `${BASE_API_URL}/login/`,
           {
             username,
             password,
