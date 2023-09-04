@@ -1,8 +1,8 @@
 import { useTable } from "react-table";
 import Pagination from "src/components/Table/Pagination";
 import { TRow, TableProps } from "src/types/TableProps";
-import { getSearchParamsFromUrl } from "src/utils/getSearchParams";
-import { isEmpty, isNotEmpty } from "src/utils/isEmpty";
+import { getSearchParamsFromUrl } from "src/utils/helpers/getSearchParams";
+import { isEmpty, isNotEmpty } from "src/utils/helpers/isEmpty";
 
 const Table = <T extends TRow>({
   columns = [],

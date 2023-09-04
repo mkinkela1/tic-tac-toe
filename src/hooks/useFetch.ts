@@ -2,7 +2,7 @@ import { CanceledError } from "axios";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import axiosInstance from "src/utils/axiosInstance";
-import { convertObjectToUrlSearchParams } from "src/utils/convertObjectToSearchParams";
+import { convertObjectToUrlSearchParams } from "src/utils/helpers/convertObjectToSearchParams";
 
 const useFetch = <T>(
   url: string,

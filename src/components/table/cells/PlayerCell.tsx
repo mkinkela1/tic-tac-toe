@@ -1,7 +1,7 @@
 import React from "react";
 import { USER_ID } from "src/utils/Constants";
-import { isEmpty } from "src/utils/isEmpty";
-import { isNullOrUndefined } from "src/utils/isNotNullOrUndefined";
+import { isEmpty } from "src/utils/helpers/isEmpty";
+import { isNullOrUndefined } from "src/utils/helpers/isNotNullOrUndefined";
 
 type Props = {
   name?: string;

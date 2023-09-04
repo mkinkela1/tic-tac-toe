@@ -1,6 +1,6 @@
 import React from "react";
 import { TPlayer, TStatus } from "src/types/TGetGamesResponse";
-import { isNotEmpty } from "src/utils/isEmpty";
+import { isNotEmpty } from "src/utils/helpers/isEmpty";
 
 type Props = {
   winner?: TPlayer;

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { AllRoutes } from "src/enums/AllRoutes";
 import { TLoginResponse } from "src/types/TLoginResponse";
 import { TOKEN, USER_ID } from "src/utils/Constants";
-import { isNotEmpty } from "src/utils/isEmpty";
-import { isNullOrUndefined } from "src/utils/isNotNullOrUndefined";
+import { isNotEmpty } from "src/utils/helpers/isEmpty";
+import { isNullOrUndefined } from "src/utils/helpers/isNotNullOrUndefined";
 
 type TLoginData = Pick<TLoginResponse, "id" | "token">;
 

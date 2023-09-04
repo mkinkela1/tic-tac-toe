@@ -8,7 +8,7 @@ import Button from "src/components/Button/Button";
 import ControlledInput from "src/components/Input/ControlledInput";
 import { AllRoutes } from "src/enums/AllRoutes";
 import { BASE_API_URL } from "src/utils/Constants";
-import { isNotObjectEmpty } from "src/utils/isEmptyObject";
+import { isNotObjectEmpty } from "src/utils/helpers/isEmptyObject";
 import * as Yup from "yup";
 
 const registrationSchema = Yup.object().shape({

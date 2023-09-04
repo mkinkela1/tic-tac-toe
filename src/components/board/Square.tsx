@@ -7,7 +7,7 @@ import { TTurn } from "src/contexts/GameContext";
 import {
   isNotNullOrUndefined,
   isNullOrUndefined,
-} from "src/utils/isNotNullOrUndefined";
+} from "src/utils/helpers/isNotNullOrUndefined";
 
 type Props = {
   value: string | number | null;

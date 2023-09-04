@@ -12,7 +12,7 @@ import { BASE_API_URL, GAME_REFETCH_INTERVAL_IN_MS } from "src/utils/Constants";
 import {
   isNotNullOrUndefined,
   isNullOrUndefined,
-} from "src/utils/isNotNullOrUndefined";
+} from "src/utils/helpers/isNotNullOrUndefined";
 
 type GameContextProviderProps = {
   children: React.ReactNode;

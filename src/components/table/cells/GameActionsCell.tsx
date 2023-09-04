@@ -5,7 +5,7 @@ import { useAuth } from "src/contexts/AuthContext";
 import { AllRoutes } from "src/enums/AllRoutes";
 import useJoinGame from "src/hooks/useJoinGame";
 import { TBoardResult } from "src/types/TGetGamesResponse";
-import { isNullOrUndefined } from "src/utils/isNotNullOrUndefined";
+import { isNullOrUndefined } from "src/utils/helpers/isNotNullOrUndefined";
 
 type Props = {
   value: TBoardResult;
