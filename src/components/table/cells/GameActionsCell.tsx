@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Button, { ButtonProps } from "src/components/Button";
+import Button, { ButtonProps } from "src/components/Button/Button";
 import { useAuth } from "src/contexts/AuthContext";
 import { AllRoutes } from "src/enums/AllRoutes";
 import useJoinGame from "src/hooks/useJoinGame";

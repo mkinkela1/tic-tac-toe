@@ -1,8 +1,5 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { TMeta } from "src/types/TableProps";
-
-export type Props = TMeta & Record<string, unknown>;
 
 const useTableQueryParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();

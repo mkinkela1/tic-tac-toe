@@ -1,4 +1,4 @@
-export const isObjectEmpty = (obj: object) => {
+const isObjectEmpty = (obj: object) => {
   return Object.keys(obj).length === 0;
 };
 

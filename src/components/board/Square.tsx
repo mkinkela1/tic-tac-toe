@@ -1,7 +1,7 @@
 import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
 import React from "react";
-import SkeletonLoader from "src/components/SkeletonLoader";
-import CircleIcon from "src/components/board/CircleIcon";
+import CircleIcon from "src/components/Board/CircleIcon";
+import SkeletonLoader from "src/components/SkeletonLoader/SkeletonLoader";
 import { useAuth } from "src/contexts/AuthContext";
 import { TTurn } from "src/contexts/GameContext";
 import {

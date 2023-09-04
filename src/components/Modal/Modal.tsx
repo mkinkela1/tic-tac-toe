@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import Button from "src/components/Button";
+import Button from "src/components/Button/Button";
 
 type Props = {
   onClose: () => void;
@@ -8,7 +8,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const MODAL_ROOT_ID = "modal-root";
+const MODAL_ROOT_ID = "modal-root";
 
 const Modal: React.FC<Props> = ({ onClose, title, children }) => {
   const modalRef: MutableRefObject<HTMLDivElement> = useRef(

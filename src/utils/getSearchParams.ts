@@ -4,9 +4,3 @@ export const getSearchParamsFromUrl = (url: string) => {
 
   return Object.fromEntries(params);
 };
-
-export const getSearchParamsFromUrlSearchParams = (val: string) => {
-  const urlSearchParams = new URLSearchParams(val);
-
-  return Object.fromEntries(urlSearchParams);
-};

@@ -1,5 +1,5 @@
 import { useTable } from "react-table";
-import Pagination from "src/components/table/Pagination";
+import Pagination from "src/components/Table/Pagination";
 import { TRow, TableProps } from "src/types/TableProps";
 import { getSearchParamsFromUrl } from "src/utils/getSearchParams";
 import { isEmpty, isNotEmpty } from "src/utils/isEmpty";

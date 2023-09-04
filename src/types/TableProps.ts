@@ -12,5 +12,5 @@ export type TRow = {
   id: number;
 };
 
-export type TMeta = Omit<TGetListResponse<unknown>, "results">;
-export type TTableQueryParams = Omit<TMeta, "count">;
+type TMeta = Omit<TGetListResponse<unknown>, "results">;
+type TTableQueryParams = Omit<TMeta, "count">;

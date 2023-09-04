@@ -1,5 +1,5 @@
 import React from "react";
-import Square from "src/components/board/Square";
+import Square from "src/components/Board/Square";
 import { useGame } from "src/contexts/GameContext";
 import useMove from "src/hooks/useMove";
 

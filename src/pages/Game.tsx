@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Modal from "src/components/Modal";
-import PlayerInfo from "src/components/PlayerInfo";
-import SkeletonLoader from "src/components/SkeletonLoader";
-import Board from "src/components/board/Board";
+import Board from "src/components/Board/Board";
+import Modal from "src/components/Modal/Modal";
+import PlayerInfo from "src/components/PlayerInfo/PlayerInfo";
+import SkeletonLoader from "src/components/SkeletonLoader/SkeletonLoader";
 import { useGame } from "src/contexts/GameContext";
 import { AllRoutes } from "src/enums/AllRoutes";
 

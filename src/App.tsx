@@ -8,9 +8,9 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import NoInternetConnection from "src/components/NoInternetConnection";
-import Page from "src/components/Page";
-import RequireAuth from "src/components/RequireAuth";
+import NoInternetConnection from "src/components/NoInternetConnection/NoInternetConnection";
+import Page from "src/components/Page/Page";
+import RequireAuth from "src/components/RequireAuth/RequireAuth";
 import { AuthProvider } from "src/contexts/AuthContext";
 import { GameProvider } from "src/contexts/GameContext";
 import { AllRoutes } from "src/enums/AllRoutes";

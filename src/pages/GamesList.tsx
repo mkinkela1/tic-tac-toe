@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import Button from "src/components/Button";
-import SelectableDropdown, { TOption } from "src/components/SelectableDropdown";
-import Table from "src/components/table/Table";
-import DateTimeCell from "src/components/table/cells/DateTimeCell";
-import GameActionsCell from "src/components/table/cells/GameActionsCell";
-import PlayerCell from "src/components/table/cells/PlayerCell";
-import WinnerCell from "src/components/table/cells/WinnerCell";
+import Button from "src/components/Button/Button";
+import SelectableDropdown, {
+  TOption,
+} from "src/components/Dropdown/SelectableDropdown";
+import Table from "src/components/Table/Table";
+import DateTimeCell from "src/components/Table/cells/DateTimeCell";
+import GameActionsCell from "src/components/Table/cells/GameActionsCell";
+import PlayerCell from "src/components/Table/cells/PlayerCell";
+import WinnerCell from "src/components/Table/cells/WinnerCell";
 import { AllRoutes } from "src/enums/AllRoutes";
 import useColumns from "src/hooks/useColumns";
 import useCreateNewGame from "src/hooks/useCreateNewGame";

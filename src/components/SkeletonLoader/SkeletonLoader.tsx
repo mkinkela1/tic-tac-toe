@@ -1,5 +1,5 @@
 type Props = {
-  type: "square" | "circle" | "row";
+  type?: "square" | "circle" | "row";
 };
 
 const SkeletonLoader: React.FC<Props> = ({ type = "square" }) => {
