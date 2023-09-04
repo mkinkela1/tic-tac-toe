@@ -3,8 +3,10 @@ import CircleIcon from "src/components/Board/CircleIcon";
 import SkeletonLoader from "src/components/SkeletonLoader/SkeletonLoader";
 import { useGame } from "src/contexts/GameContext";
 import { TPlayer } from "src/types/TGetGamesResponse";
-import { isNullOrUndefined } from "src/utils/helpers/isNotNullOrUndefined";
-import { isNotNullOrUndefined } from "../../utils/helpers/isNotNullOrUndefined";
+import {
+  isNotNullOrUndefined,
+  isNullOrUndefined,
+} from "src/utils/helpers/isNotNullOrUndefined";
 
 type Props = {
   isLoading: boolean;
