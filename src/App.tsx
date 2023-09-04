@@ -18,6 +18,7 @@ import Game from "src/pages/Game";
 import GamesList from "src/pages/GamesList";
 import Highscores from "src/pages/Highscores";
 import Login from "src/pages/Login";
+import Logout from "src/pages/Logout";
 import Registration from "src/pages/Registration";
 
 const App: React.FC = () => {
@@ -56,6 +57,16 @@ const App: React.FC = () => {
               <RequireAuth>
                 <Page>
                   <Highscores />
+                </Page>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path={AllRoutes.LOGOUT}
+            element={
+              <RequireAuth>
+                <Page>
+                  <Logout />
                 </Page>
               </RequireAuth>
             }
